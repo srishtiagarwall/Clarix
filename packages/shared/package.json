@@ -1,0 +1,16 @@
+{
+  "name": "@clarix/shared",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "type-check": "tsc --noEmit -p tsconfig.json",
+    "test": "node -e \"console.log('shared tests pending')\""
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
