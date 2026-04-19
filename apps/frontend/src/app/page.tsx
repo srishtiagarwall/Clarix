@@ -1,5 +1,6 @@
 'use client';
 
+import { DevLoginButton } from '@/components/dev-login-button';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowRight, BarChart3, Clock, Zap } from 'lucide-react';
@@ -102,6 +103,7 @@ export default function HomePage() {
             </Button>
           </a>
         </div>
+        <DevLoginButton />
       </section>
 
       {/* Features Grid */}

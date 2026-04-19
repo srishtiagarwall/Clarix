@@ -4,6 +4,7 @@ import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { WorkspacesService } from '../workspaces/workspaces.service';
 import { AuthResponseDto } from './dto/auth-response.dto';
+import { DevLoginDto } from './dto/dev-login.dto';
 
 interface GoogleAuthInput {
   googleId: string;
@@ -22,6 +23,21 @@ export class AuthService {
 
   async loginFromGoogle(input: GoogleAuthInput): Promise<AuthResponseDto> {
     const user = await this.usersService.findOrCreateFromGoogleProfile(input);
+    const workspace = await this.workspacesService.ensureDefaultWorkspace(user.id, user.name);
+    return this.buildAuthResponse(user, workspace.id);
+  }
+
+  async loginForDevelopment(input: DevLoginDto): Promise<AuthResponseDto> {
+    const name = input.name?.trim() || 'Clarix Dev User';
+    const email = input.email?.trim().toLowerCase() || 'dev@clarix.local';
+
+    const user = await this.usersService.findOrCreateFromGoogleProfile({
+      googleId: `dev:${email}`,
+      email,
+      name,
+      avatarUrl: null,
+    });
+
     const workspace = await this.workspacesService.ensureDefaultWorkspace(user.id, user.name);
     return this.buildAuthResponse(user, workspace.id);
   }

@@ -7,4 +7,6 @@ export default registerAs('google', () => ({
   adsClientId: process.env.GOOGLE_ADS_CLIENT_ID ?? '',
   adsClientSecret: process.env.GOOGLE_ADS_CLIENT_SECRET ?? '',
   adsCallbackUrl: process.env.GOOGLE_ADS_CALLBACK_URL ?? 'http://localhost:3001/auth/google-ads/callback',
+  adsDeveloperToken: process.env.GOOGLE_ADS_DEVELOPER_TOKEN ?? '',
+  adsLoginCustomerId: process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID ?? '',
 }));

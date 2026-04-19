@@ -1,0 +1,11 @@
+import { IsEmail, IsOptional, IsString } from 'class-validator';
+
+export class DevLoginDto {
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @IsOptional()
+  @IsString()
+  name?: string;
+}

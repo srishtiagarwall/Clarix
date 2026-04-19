@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
 import { WorkspacesModule } from '../workspaces/workspaces.module';
+import { AccountsModule } from '../accounts/accounts.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { GoogleAdsAuthGuard } from './guards/google-ads-auth.guard';
@@ -26,6 +27,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     }),
     UsersModule,
     WorkspacesModule,
+    AccountsModule,
   ],
   controllers: [AuthController],
   providers: [

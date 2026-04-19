@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
 import { Strategy, Profile, VerifyCallback } from 'passport-google-oauth20';
+import { Request } from 'express';
 
 @Injectable()
 export class GoogleAdsStrategy extends PassportStrategy(Strategy, 'google-ads') {
@@ -16,11 +17,12 @@ export class GoogleAdsStrategy extends PassportStrategy(Strategy, 'google-ads') 
       clientSecret,
       callbackURL: configService.get<string>('google.adsCallbackUrl') ?? '',
       scope: ['https://www.googleapis.com/auth/adwords'],
-      passReqToCallback: false,
+      passReqToCallback: true,
     });
   }
 
   validate(
+    req: Request,
     accessToken: string,
     refreshToken: string,
     profile: Profile,
@@ -29,6 +31,7 @@ export class GoogleAdsStrategy extends PassportStrategy(Strategy, 'google-ads') 
     done(null, {
       accessToken,
       refreshToken,
+      state: typeof req.query.state === 'string' ? req.query.state : undefined,
       googleId: profile.id,
       email: profile.emails?.[0]?.value,
       name: profile.displayName,
